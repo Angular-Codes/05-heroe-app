@@ -9,6 +9,7 @@ import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { HeroeCardComponent } from './components/heroe-card/heroe-card.component';
+import { ImagePipe } from './pipes/image.pipe';
 
 
 
@@ -19,7 +20,8 @@ import { HeroeCardComponent } from './components/heroe-card/heroe-card.component
     HeroeComponent,
     HomeComponent,
     ListComponent,
-    HeroeCardComponent
+    HeroeCardComponent,
+    ImagePipe
   ],
   imports: [
     CommonModule,
