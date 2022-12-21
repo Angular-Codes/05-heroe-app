@@ -1,0 +1,14 @@
+<div
+  class="alert"
+  [ngClass]="typeAlert"
+  *ngIf="visible"
+>
+  {{ messageAlert }}
+
+  <div 
+    class="close"
+    [ngClass]="typeAlert"
+    (click)="this.visible = false"
+  ></div>
+
+</div>

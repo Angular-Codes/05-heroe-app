@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { HeroeCardComponent } from './components/heroe-card/heroe-card.component';
 import { ImagePipe } from './pipes/image.pipe';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 
@@ -21,7 +22,8 @@ import { ImagePipe } from './pipes/image.pipe';
     HomeComponent,
     ListComponent,
     HeroeCardComponent,
-    ImagePipe
+    ImagePipe,
+    AlertComponent
   ],
   imports: [
     CommonModule,
