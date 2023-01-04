@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -16,6 +17,7 @@ export class HeroeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroeService: HeroesService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +30,10 @@ export class HeroeComponent implements OnInit {
             this.heroe = heroe
           },
         })
+  }
+
+  previousPage(): void {
+    this.location.back();
   }
 
 

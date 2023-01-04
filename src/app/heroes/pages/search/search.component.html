@@ -1,1 +1,39 @@
-<p>search works!</p>
+
+<div fxLayout="column">
+
+  <div>
+    <h1>Heroe Search</h1>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div fxLayout="column">
+    <mat-form-field class="example-full-width">
+      <input 
+        placeholder="Pick one"
+        type="text" 
+        matInput
+        [matAutocomplete]="auto"
+        [(ngModel)]="term"
+        (input)="searchTerm()"
+      >
+      <mat-autocomplete 
+        autoActiveFirstOption 
+        #auto="matAutocomplete"
+        (optionSelected)="selectedHeroe($event)"
+      >
+        <mat-option *ngFor="let heroe of heroes" [value]="heroe">
+          {{ heroe.superhero }}
+        </mat-option>
+        
+        <mat-option *ngIf="!heroes.length && term.length > 0" [value]="''">
+          No heroes found with "{{ term }}"
+        </mat-option>
+        
+      </mat-autocomplete>
+    </mat-form-field>
+  </div> 
+</div>
+
+<pre>
+  {{ selectedHero | json }}
+</pre>
