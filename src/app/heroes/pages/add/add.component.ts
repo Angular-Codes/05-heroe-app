@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-add',
@@ -39,7 +39,10 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRouter.params
-        .pipe( switchMap( ({ id }) => this.heroesService.getHeroeById(id)) )
+        .pipe( switchMap( ({ id }) => { 
+          if( !id ) return of()
+          return this.heroesService.getHeroeById(id)
+        }) )
         .subscribe({
           next: (heroe) => {
             this.heroe = heroe
@@ -61,7 +64,7 @@ export class AddComponent implements OnInit {
         .saveHero(this.heroe)
         .subscribe({
           next: ( heroe ) => {
-            this.router.navigate(['/heroes', heroe.id])
+            this.router.navigate(['/heroes/edit', heroe.id])
           },
         })
   }
@@ -71,13 +74,21 @@ export class AddComponent implements OnInit {
         .editHero(this.heroe)
         .subscribe({
           next: ( heroe ) => {
-            this.router.navigate(['/heroes', heroe.id])
+            this.router.navigate(['/heroes/edit', heroe.id])
           },
         })
   }
 
   isEditHero() {
     return this.heroe.id ? true : false;
+  }
+
+  onDeleteHero(){
+    this.heroesService
+        .deleteHero( this.heroe.id! )
+        .subscribe( resp => {
+          this.router.navigate(['/heroes/list'])
+        })
   }
 
 }
