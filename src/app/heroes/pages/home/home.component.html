@@ -38,7 +38,10 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
-    <button mat-raised-button color="primary">
+    <button 
+      mat-raised-button 
+      (click)="onLogout()"
+      color="primary">
       Logout
     </button>
   </mat-toolbar>

@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'heroes'
+    redirectTo: '404'
   }
 ]
 
