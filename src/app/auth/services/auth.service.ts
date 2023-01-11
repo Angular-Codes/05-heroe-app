@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ){}
 
 
   login(): Observable<Auth>{
@@ -28,6 +28,10 @@ export class AuthService {
 
   setUser(user: Auth) {
     this.user = user;
+  }
+
+  logout() {
+    this.user = undefined;
   }
 
 }
