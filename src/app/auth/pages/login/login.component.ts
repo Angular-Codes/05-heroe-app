@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Auth } from '../../interfaces/auth.interface';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +25,16 @@ export class LoginComponent implements OnInit {
           next: (value) => {
             value && this.router.navigate(['./heroes'])
             this.authService.setUser(value)
+            this.saveUserSession(value)
           },
           error: (err) => {
             
           },
         })
+  }
+
+  saveUserSession(userData: Auth){
+    localStorage.setItem('id', userData.id)
   }
 
 }

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   onLogout(){
+    this.authService.logout()
     this.router.navigate(['./auth'])
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Auth } from '../interfaces/auth.interface';
 
 @Injectable({
@@ -21,6 +21,20 @@ export class AuthService {
     private http: HttpClient
   ){}
 
+  validateAuth():Observable<boolean>{
+    const userId = localStorage.getItem('id')
+    if( !userId ) return of(false)
+
+    return this.http
+                .get<Auth>(`${this.baseUrl}/usuarios/${userId}`)
+                .pipe(
+                  map( auth => {
+                    this.user = auth;
+                    return true
+                  })
+                );
+  }
+
 
   login(): Observable<Auth>{
     return this.http.get<Auth>(`${this.baseUrl}/usuarios/1`)
@@ -32,6 +46,7 @@ export class AuthService {
 
   logout() {
     this.user = undefined;
+    localStorage.clear()
   }
 
 }
